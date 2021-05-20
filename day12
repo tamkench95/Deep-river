@@ -1,0 +1,2212 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled3.ipynb",
+      "provenance": [],
+      "authorship_tag": "ABX9TyMpFCvMYAPEODQ757p/MegA",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/tamkench95/Deep-river/blob/main/day12\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "CiLDI_OZk4pI"
+      },
+      "source": [
+        "import pandas as pd"
+      ],
+      "execution_count": 1,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "z781DjpLk7sR"
+      },
+      "source": [
+        "d1 = pd.read_csv('/content/ss.txt')"
+      ],
+      "execution_count": 4,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "9LUIKNNMlQnx"
+      },
+      "source": [
+        "d2 = pd.read_csv('/content/sc.csv', encoding= 'cp949')"
+      ],
+      "execution_count": 6,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 314
+        },
+        "id": "OFJPVOrVlRKt",
+        "outputId": "0943e8c5-aee1-4c71-ee2e-7e66b2bcf7af"
+      },
+      "source": [
+        "d2"
+      ],
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이순신</th>\n",
+              "      <th>85</th>\n",
+              "      <th>87</th>\n",
+              "      <th>90</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>강감찬</td>\n",
+              "      <td>75</td>\n",
+              "      <td>80</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>한석봉</td>\n",
+              "      <td>99</td>\n",
+              "      <td>98</td>\n",
+              "      <td>99</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>황진이</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "      <td>20</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>안중근</td>\n",
+              "      <td>90</td>\n",
+              "      <td>85</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>박문수</td>\n",
+              "      <td>95</td>\n",
+              "      <td>98</td>\n",
+              "      <td>96</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>임꺽정</td>\n",
+              "      <td>15</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>김정호</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "      <td>80</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>정몽주</td>\n",
+              "      <td>90</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>임수빈</td>\n",
+              "      <td>50</td>\n",
+              "      <td>45</td>\n",
+              "      <td>60</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "   이순신  85  87  90\n",
+              "0  강감찬  75  80  95\n",
+              "1  한석봉  99  98  99\n",
+              "2  황진이  35  45  20\n",
+              "3  안중근  90  85  90\n",
+              "4  박문수  95  98  96\n",
+              "5  임꺽정  15  35  45\n",
+              "6  김정호  90  95  80\n",
+              "7  정몽주  90  90  95\n",
+              "8  임수빈  50  45  60"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 7
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "rnZbZJyilhaB"
+      },
+      "source": [
+        "d3 = pd.read_excel('/content/se.xlsx', names=['이름','국어','영어','수학'])"
+      ],
+      "execution_count": 13,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 314
+        },
+        "id": "9iZ5FV0glsHq",
+        "outputId": "fbf68c15-6a2d-4eff-9834-b08404b587f4"
+      },
+      "source": [
+        "d3"
+      ],
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이름</th>\n",
+              "      <th>국어</th>\n",
+              "      <th>영어</th>\n",
+              "      <th>수학</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>강감찬</td>\n",
+              "      <td>75</td>\n",
+              "      <td>80</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>한석봉</td>\n",
+              "      <td>99</td>\n",
+              "      <td>98</td>\n",
+              "      <td>99</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>황진이</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "      <td>20</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>안중근</td>\n",
+              "      <td>90</td>\n",
+              "      <td>85</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>박문수</td>\n",
+              "      <td>95</td>\n",
+              "      <td>98</td>\n",
+              "      <td>96</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>임꺽정</td>\n",
+              "      <td>15</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>김정호</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "      <td>80</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>정몽주</td>\n",
+              "      <td>90</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>임수빈</td>\n",
+              "      <td>50</td>\n",
+              "      <td>45</td>\n",
+              "      <td>60</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    이름  국어  영어  수학\n",
+              "0  강감찬  75  80  95\n",
+              "1  한석봉  99  98  99\n",
+              "2  황진이  35  45  20\n",
+              "3  안중근  90  85  90\n",
+              "4  박문수  95  98  96\n",
+              "5  임꺽정  15  35  45\n",
+              "6  김정호  90  95  80\n",
+              "7  정몽주  90  90  95\n",
+              "8  임수빈  50  45  60"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 14
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "3D_RaCuDmAYF"
+      },
+      "source": [
+        "d5 = pd.read_excel('/content/se.xlsx', header=None, names=['이름','국어','영어','수학'])"
+      ],
+      "execution_count": 18,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 343
+        },
+        "id": "yWLEVoHloqGL",
+        "outputId": "933db379-c088-44eb-9e73-406679deaf59"
+      },
+      "source": [
+        "d5"
+      ],
+      "execution_count": 19,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이름</th>\n",
+              "      <th>국어</th>\n",
+              "      <th>영어</th>\n",
+              "      <th>수학</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>이순신</td>\n",
+              "      <td>85</td>\n",
+              "      <td>87</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>강감찬</td>\n",
+              "      <td>75</td>\n",
+              "      <td>80</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>한석봉</td>\n",
+              "      <td>99</td>\n",
+              "      <td>98</td>\n",
+              "      <td>99</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>황진이</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "      <td>20</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>안중근</td>\n",
+              "      <td>90</td>\n",
+              "      <td>85</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>박문수</td>\n",
+              "      <td>95</td>\n",
+              "      <td>98</td>\n",
+              "      <td>96</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>임꺽정</td>\n",
+              "      <td>15</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>김정호</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "      <td>80</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>정몽주</td>\n",
+              "      <td>90</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>9</th>\n",
+              "      <td>임수빈</td>\n",
+              "      <td>50</td>\n",
+              "      <td>45</td>\n",
+              "      <td>60</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    이름  국어  영어  수학\n",
+              "0  이순신  85  87  90\n",
+              "1  강감찬  75  80  95\n",
+              "2  한석봉  99  98  99\n",
+              "3  황진이  35  45  20\n",
+              "4  안중근  90  85  90\n",
+              "5  박문수  95  98  96\n",
+              "6  임꺽정  15  35  45\n",
+              "7  김정호  90  95  80\n",
+              "8  정몽주  90  90  95\n",
+              "9  임수빈  50  45  60"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 19
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 195
+        },
+        "id": "yoL2f2zcot1o",
+        "outputId": "b708df75-ffe6-44f3-9fe9-8844d9769370"
+      },
+      "source": [
+        "d5.head(5)"
+      ],
+      "execution_count": 20,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이름</th>\n",
+              "      <th>국어</th>\n",
+              "      <th>영어</th>\n",
+              "      <th>수학</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>이순신</td>\n",
+              "      <td>85</td>\n",
+              "      <td>87</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>강감찬</td>\n",
+              "      <td>75</td>\n",
+              "      <td>80</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>한석봉</td>\n",
+              "      <td>99</td>\n",
+              "      <td>98</td>\n",
+              "      <td>99</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>황진이</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "      <td>20</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>안중근</td>\n",
+              "      <td>90</td>\n",
+              "      <td>85</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    이름  국어  영어  수학\n",
+              "0  이순신  85  87  90\n",
+              "1  강감찬  75  80  95\n",
+              "2  한석봉  99  98  99\n",
+              "3  황진이  35  45  20\n",
+              "4  안중근  90  85  90"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 20
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 195
+        },
+        "id": "E9cwsRbDpPQK",
+        "outputId": "bb5f955c-d950-48af-c55f-414d75176a2e"
+      },
+      "source": [
+        "d5.tail(5)"
+      ],
+      "execution_count": 21,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이름</th>\n",
+              "      <th>국어</th>\n",
+              "      <th>영어</th>\n",
+              "      <th>수학</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>박문수</td>\n",
+              "      <td>95</td>\n",
+              "      <td>98</td>\n",
+              "      <td>96</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>임꺽정</td>\n",
+              "      <td>15</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>김정호</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "      <td>80</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>정몽주</td>\n",
+              "      <td>90</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>9</th>\n",
+              "      <td>임수빈</td>\n",
+              "      <td>50</td>\n",
+              "      <td>45</td>\n",
+              "      <td>60</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    이름  국어  영어  수학\n",
+              "5  박문수  95  98  96\n",
+              "6  임꺽정  15  35  45\n",
+              "7  김정호  90  95  80\n",
+              "8  정몽주  90  90  95\n",
+              "9  임수빈  50  45  60"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 21
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "iFKtC6K3pRFx",
+        "outputId": "71a45c5f-1ec2-4de9-98ae-af5b02df963e"
+      },
+      "source": [
+        "d5.info()"
+      ],
+      "execution_count": 23,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "<class 'pandas.core.frame.DataFrame'>\n",
+            "RangeIndex: 10 entries, 0 to 9\n",
+            "Data columns (total 4 columns):\n",
+            " #   Column  Non-Null Count  Dtype \n",
+            "---  ------  --------------  ----- \n",
+            " 0   이름      10 non-null     object\n",
+            " 1   국어      10 non-null     int64 \n",
+            " 2   영어      10 non-null     int64 \n",
+            " 3   수학      10 non-null     int64 \n",
+            "dtypes: int64(3), object(1)\n",
+            "memory usage: 448.0+ bytes\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 284
+        },
+        "id": "vHV-tBpqpS54",
+        "outputId": "d94f7ad5-6874-4469-de7a-e9e697c51b0d"
+      },
+      "source": [
+        "d5.describe()"
+      ],
+      "execution_count": 26,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>국어</th>\n",
+              "      <th>영어</th>\n",
+              "      <th>수학</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>count</th>\n",
+              "      <td>10.000000</td>\n",
+              "      <td>10.000000</td>\n",
+              "      <td>10.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>mean</th>\n",
+              "      <td>72.400000</td>\n",
+              "      <td>75.800000</td>\n",
+              "      <td>77.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>std</th>\n",
+              "      <td>28.883675</td>\n",
+              "      <td>24.371203</td>\n",
+              "      <td>26.670833</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>min</th>\n",
+              "      <td>15.000000</td>\n",
+              "      <td>35.000000</td>\n",
+              "      <td>20.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>25%</th>\n",
+              "      <td>56.250000</td>\n",
+              "      <td>53.750000</td>\n",
+              "      <td>65.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>50%</th>\n",
+              "      <td>87.500000</td>\n",
+              "      <td>86.000000</td>\n",
+              "      <td>90.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>75%</th>\n",
+              "      <td>90.000000</td>\n",
+              "      <td>93.750000</td>\n",
+              "      <td>95.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>max</th>\n",
+              "      <td>99.000000</td>\n",
+              "      <td>98.000000</td>\n",
+              "      <td>99.000000</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "              국어         영어         수학\n",
+              "count  10.000000  10.000000  10.000000\n",
+              "mean   72.400000  75.800000  77.000000\n",
+              "std    28.883675  24.371203  26.670833\n",
+              "min    15.000000  35.000000  20.000000\n",
+              "25%    56.250000  53.750000  65.000000\n",
+              "50%    87.500000  86.000000  90.000000\n",
+              "75%    90.000000  93.750000  95.000000\n",
+              "max    99.000000  98.000000  99.000000"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 26
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "HrV5LyA9poNr",
+        "outputId": "86137f39-d9e8-4bc8-e17a-56556a611e04"
+      },
+      "source": [
+        "d5.describe"
+      ],
+      "execution_count": 27,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "<bound method NDFrame.describe of     이름  국어  영어  수학\n",
+              "0  이순신  85  87  90\n",
+              "1  강감찬  75  80  95\n",
+              "2  한석봉  99  98  99\n",
+              "3  황진이  35  45  20\n",
+              "4  안중근  90  85  90\n",
+              "5  박문수  95  98  96\n",
+              "6  임꺽정  15  35  45\n",
+              "7  김정호  90  95  80\n",
+              "8  정몽주  90  90  95\n",
+              "9  임수빈  50  45  60>"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 27
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "lQcDp8FZpWUp",
+        "outputId": "9bcdd5b5-2249-401d-90eb-54b3f742cc99"
+      },
+      "source": [
+        "d5.index"
+      ],
+      "execution_count": 30,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "RangeIndex(start=0, stop=10, step=1)"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 30
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "PBLKskIFpyKd",
+        "outputId": "89274633-ff29-4bbf-f155-9ebb3ca20834"
+      },
+      "source": [
+        "d5.columns"
+      ],
+      "execution_count": 32,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "Index(['이름', '국어', '영어', '수학'], dtype='object')"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 32
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 343
+        },
+        "id": "Tg6eNy76qDYn",
+        "outputId": "1bdaa570-b085-4ad4-d13e-14b8e846288b"
+      },
+      "source": [
+        "d5[['이름','영어']]"
+      ],
+      "execution_count": 35,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이름</th>\n",
+              "      <th>영어</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>이순신</td>\n",
+              "      <td>87</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>강감찬</td>\n",
+              "      <td>80</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>한석봉</td>\n",
+              "      <td>98</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>황진이</td>\n",
+              "      <td>45</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>안중근</td>\n",
+              "      <td>85</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>박문수</td>\n",
+              "      <td>98</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>임꺽정</td>\n",
+              "      <td>35</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>김정호</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>정몽주</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>9</th>\n",
+              "      <td>임수빈</td>\n",
+              "      <td>45</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    이름  영어\n",
+              "0  이순신  87\n",
+              "1  강감찬  80\n",
+              "2  한석봉  98\n",
+              "3  황진이  45\n",
+              "4  안중근  85\n",
+              "5  박문수  98\n",
+              "6  임꺽정  35\n",
+              "7  김정호  95\n",
+              "8  정몽주  90\n",
+              "9  임수빈  45"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 35
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "HQw9uus1qZpT",
+        "outputId": "0ea96265-21fc-4b31-9060-4f18765e197e"
+      },
+      "source": [
+        "d5.loc[0]"
+      ],
+      "execution_count": 40,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "이름    이순신\n",
+              "국어     85\n",
+              "영어     87\n",
+              "수학     90\n",
+              "Name: 0, dtype: object"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 40
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "fblknY1aq-uK",
+        "outputId": "8de4dc71-9f52-4c6e-ff0a-38d4affbc464"
+      },
+      "source": [
+        "d5.loc[2]"
+      ],
+      "execution_count": 41,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "이름    한석봉\n",
+              "국어     99\n",
+              "영어     98\n",
+              "수학     99\n",
+              "Name: 2, dtype: object"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 41
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 166
+        },
+        "id": "2RbsT9wnrX8u",
+        "outputId": "4826b7fa-7c86-4eab-b0c2-e9cc2e293538"
+      },
+      "source": [
+        "d5.loc[3:6]"
+      ],
+      "execution_count": 42,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이름</th>\n",
+              "      <th>국어</th>\n",
+              "      <th>영어</th>\n",
+              "      <th>수학</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>황진이</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "      <td>20</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>안중근</td>\n",
+              "      <td>90</td>\n",
+              "      <td>85</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>박문수</td>\n",
+              "      <td>95</td>\n",
+              "      <td>98</td>\n",
+              "      <td>96</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>임꺽정</td>\n",
+              "      <td>15</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    이름  국어  영어  수학\n",
+              "3  황진이  35  45  20\n",
+              "4  안중근  90  85  90\n",
+              "5  박문수  95  98  96\n",
+              "6  임꺽정  15  35  45"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 42
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 343
+        },
+        "id": "nGV8jRM3rfx1",
+        "outputId": "7f5407d6-20e6-46d4-af82-298e24b36acb"
+      },
+      "source": [
+        "d5[:]"
+      ],
+      "execution_count": 44,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이름</th>\n",
+              "      <th>국어</th>\n",
+              "      <th>영어</th>\n",
+              "      <th>수학</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>이순신</td>\n",
+              "      <td>85</td>\n",
+              "      <td>87</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>강감찬</td>\n",
+              "      <td>75</td>\n",
+              "      <td>80</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>한석봉</td>\n",
+              "      <td>99</td>\n",
+              "      <td>98</td>\n",
+              "      <td>99</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>황진이</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "      <td>20</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>안중근</td>\n",
+              "      <td>90</td>\n",
+              "      <td>85</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>박문수</td>\n",
+              "      <td>95</td>\n",
+              "      <td>98</td>\n",
+              "      <td>96</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>임꺽정</td>\n",
+              "      <td>15</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>김정호</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "      <td>80</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>정몽주</td>\n",
+              "      <td>90</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>9</th>\n",
+              "      <td>임수빈</td>\n",
+              "      <td>50</td>\n",
+              "      <td>45</td>\n",
+              "      <td>60</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    이름  국어  영어  수학\n",
+              "0  이순신  85  87  90\n",
+              "1  강감찬  75  80  95\n",
+              "2  한석봉  99  98  99\n",
+              "3  황진이  35  45  20\n",
+              "4  안중근  90  85  90\n",
+              "5  박문수  95  98  96\n",
+              "6  임꺽정  15  35  45\n",
+              "7  김정호  90  95  80\n",
+              "8  정몽주  90  90  95\n",
+              "9  임수빈  50  45  60"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 44
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 195
+        },
+        "id": "3zRc8W10rpr2",
+        "outputId": "bb6dffd5-0191-4bea-a313-5fa8e8b29d31"
+      },
+      "source": [
+        "d5[::2] #[start:end:step]"
+      ],
+      "execution_count": 47,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이름</th>\n",
+              "      <th>국어</th>\n",
+              "      <th>영어</th>\n",
+              "      <th>수학</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>이순신</td>\n",
+              "      <td>85</td>\n",
+              "      <td>87</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>한석봉</td>\n",
+              "      <td>99</td>\n",
+              "      <td>98</td>\n",
+              "      <td>99</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>안중근</td>\n",
+              "      <td>90</td>\n",
+              "      <td>85</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>임꺽정</td>\n",
+              "      <td>15</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>정몽주</td>\n",
+              "      <td>90</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    이름  국어  영어  수학\n",
+              "0  이순신  85  87  90\n",
+              "2  한석봉  99  98  99\n",
+              "4  안중근  90  85  90\n",
+              "6  임꺽정  15  35  45\n",
+              "8  정몽주  90  90  95"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 47
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 343
+        },
+        "id": "PaxJdtkJrtWN",
+        "outputId": "aee51127-bac2-4533-f930-4e58f6d2e835"
+      },
+      "source": [
+        "d5"
+      ],
+      "execution_count": 48,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이름</th>\n",
+              "      <th>국어</th>\n",
+              "      <th>영어</th>\n",
+              "      <th>수학</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>이순신</td>\n",
+              "      <td>85</td>\n",
+              "      <td>87</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>강감찬</td>\n",
+              "      <td>75</td>\n",
+              "      <td>80</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>한석봉</td>\n",
+              "      <td>99</td>\n",
+              "      <td>98</td>\n",
+              "      <td>99</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>황진이</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "      <td>20</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>안중근</td>\n",
+              "      <td>90</td>\n",
+              "      <td>85</td>\n",
+              "      <td>90</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>박문수</td>\n",
+              "      <td>95</td>\n",
+              "      <td>98</td>\n",
+              "      <td>96</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>임꺽정</td>\n",
+              "      <td>15</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>김정호</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "      <td>80</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>정몽주</td>\n",
+              "      <td>90</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>9</th>\n",
+              "      <td>임수빈</td>\n",
+              "      <td>50</td>\n",
+              "      <td>45</td>\n",
+              "      <td>60</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    이름  국어  영어  수학\n",
+              "0  이순신  85  87  90\n",
+              "1  강감찬  75  80  95\n",
+              "2  한석봉  99  98  99\n",
+              "3  황진이  35  45  20\n",
+              "4  안중근  90  85  90\n",
+              "5  박문수  95  98  96\n",
+              "6  임꺽정  15  35  45\n",
+              "7  김정호  90  95  80\n",
+              "8  정몽주  90  90  95\n",
+              "9  임수빈  50  45  60"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 48
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 106
+        },
+        "id": "Cic-32XwsEVJ",
+        "outputId": "9bcabd61-ea59-496a-b30a-c251c15832ed"
+      },
+      "source": [
+        "d5.loc[2:3, ['영어','수학']]"
+      ],
+      "execution_count": 54,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>영어</th>\n",
+              "      <th>수학</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>98</td>\n",
+              "      <td>99</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>45</td>\n",
+              "      <td>20</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "   영어  수학\n",
+              "2  98  99\n",
+              "3  45  20"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 54
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "RXXKB0PHsPO5",
+        "outputId": "59db83a3-dcc2-43d2-e85e-ba0e40f18127"
+      },
+      "source": [
+        "d5.loc[3]"
+      ],
+      "execution_count": 56,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "이름    황진이\n",
+              "국어     35\n",
+              "영어     45\n",
+              "수학     20\n",
+              "Name: 3, dtype: object"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 56
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 195
+        },
+        "id": "WW2vPnAGtC77",
+        "outputId": "f8c6b7e2-5684-45ea-e53a-9a231f00a53c"
+      },
+      "source": [
+        "d5.loc[5:9]"
+      ],
+      "execution_count": 58,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이름</th>\n",
+              "      <th>국어</th>\n",
+              "      <th>영어</th>\n",
+              "      <th>수학</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>박문수</td>\n",
+              "      <td>95</td>\n",
+              "      <td>98</td>\n",
+              "      <td>96</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>임꺽정</td>\n",
+              "      <td>15</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>김정호</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "      <td>80</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>정몽주</td>\n",
+              "      <td>90</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>9</th>\n",
+              "      <td>임수빈</td>\n",
+              "      <td>50</td>\n",
+              "      <td>45</td>\n",
+              "      <td>60</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    이름  국어  영어  수학\n",
+              "5  박문수  95  98  96\n",
+              "6  임꺽정  15  35  45\n",
+              "7  김정호  90  95  80\n",
+              "8  정몽주  90  90  95\n",
+              "9  임수빈  50  45  60"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 58
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 195
+        },
+        "id": "79D-55VktJ7D",
+        "outputId": "04e15dbb-ed08-4a65-e1f7-1dd8a8447c66"
+      },
+      "source": [
+        "d5.loc[::-2]"
+      ],
+      "execution_count": 60,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이름</th>\n",
+              "      <th>국어</th>\n",
+              "      <th>영어</th>\n",
+              "      <th>수학</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>9</th>\n",
+              "      <td>임수빈</td>\n",
+              "      <td>50</td>\n",
+              "      <td>45</td>\n",
+              "      <td>60</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>김정호</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "      <td>80</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>박문수</td>\n",
+              "      <td>95</td>\n",
+              "      <td>98</td>\n",
+              "      <td>96</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>황진이</td>\n",
+              "      <td>35</td>\n",
+              "      <td>45</td>\n",
+              "      <td>20</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>강감찬</td>\n",
+              "      <td>75</td>\n",
+              "      <td>80</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    이름  국어  영어  수학\n",
+              "9  임수빈  50  45  60\n",
+              "7  김정호  90  95  80\n",
+              "5  박문수  95  98  96\n",
+              "3  황진이  35  45  20\n",
+              "1  강감찬  75  80  95"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 60
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 136
+        },
+        "id": "0HDtKZVGtYwz",
+        "outputId": "6b914578-ab85-41eb-f40a-7c8028901bda"
+      },
+      "source": [
+        "d5.loc[2:8:3]"
+      ],
+      "execution_count": 62,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이름</th>\n",
+              "      <th>국어</th>\n",
+              "      <th>영어</th>\n",
+              "      <th>수학</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>한석봉</td>\n",
+              "      <td>99</td>\n",
+              "      <td>98</td>\n",
+              "      <td>99</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>박문수</td>\n",
+              "      <td>95</td>\n",
+              "      <td>98</td>\n",
+              "      <td>96</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>정몽주</td>\n",
+              "      <td>90</td>\n",
+              "      <td>90</td>\n",
+              "      <td>95</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    이름  국어  영어  수학\n",
+              "2  한석봉  99  98  99\n",
+              "5  박문수  95  98  96\n",
+              "8  정몽주  90  90  95"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 62
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 106
+        },
+        "id": "99PWxTZGtiKs",
+        "outputId": "59c623df-087d-4dfa-8d4f-c6591e4a878b"
+      },
+      "source": [
+        "d5.loc[5:6,['이름', '수학', '영어']]"
+      ],
+      "execution_count": 66,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>이름</th>\n",
+              "      <th>수학</th>\n",
+              "      <th>영어</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>박문수</td>\n",
+              "      <td>96</td>\n",
+              "      <td>98</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>임꺽정</td>\n",
+              "      <td>45</td>\n",
+              "      <td>35</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>"
+            ],
+            "text/plain": [
+              "    이름  수학  영어\n",
+              "5  박문수  96  98\n",
+              "6  임꺽정  45  35"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 66
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "H4FxMru-uDmU",
+        "outputId": "53f64e34-ff7c-423d-ce99-1ca8b6fc9b6b"
+      },
+      "source": [
+        "d5.loc[3][2]"
+      ],
+      "execution_count": 67,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "45"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 67
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "X8IMSMezu7wP",
+        "outputId": "0e7e5b60-1913-4cf6-cb78-607e5d2f09e4"
+      },
+      "source": [
+        "d5.loc[0,['이름', '국어', '수학', '영어']]"
+      ],
+      "execution_count": 69,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "이름    이순신\n",
+              "국어     85\n",
+              "수학     90\n",
+              "영어     87\n",
+              "Name: 0, dtype: object"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 69
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "jQiL-h7FvMsg",
+        "outputId": "b1195548-429f-4619-acdc-ca8660a798ce"
+      },
+      "source": [
+        "d5.index"
+      ],
+      "execution_count": 72,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "RangeIndex(start=0, stop=10, step=1)"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 72
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "LrNG83ai7iv-",
+        "outputId": "a6130a1a-edb4-473a-dd43-89d13ff9c63a"
+      },
+      "source": [
+        "d5.shape"
+      ],
+      "execution_count": 73,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "(10, 4)"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 73
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "sWCENqXR7pPQ",
+        "outputId": "0ad1d9c9-0a17-4102-d782-2630763b4d16"
+      },
+      "source": [
+        "d5.ndim"
+      ],
+      "execution_count": 74,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "2"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 74
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "l5rNnA5Y7qgf",
+        "outputId": "10c58946-be06-4685-f241-c3262d5f110b"
+      },
+      "source": [
+        "type(d5)"
+      ],
+      "execution_count": 75,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "pandas.core.frame.DataFrame"
+            ]
+          },
+          "metadata": {
+            "tags": []
+          },
+          "execution_count": 75
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "V8J7I32x7s35"
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
